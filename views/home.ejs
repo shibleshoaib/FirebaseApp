@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCZ9XsO81_ScL-f19o7kNnxopnnOz-Zm1Y",
+            authDomain: "intro-proj.firebaseapp.com",
+            databaseURL: "https://intro-proj.firebaseio.com",
+            projectId: "intro-proj",
+            storageBucket: "intro-proj.appspot.com",
+            messagingSenderId: "395079589710"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Firebase Node.js</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ToDo List App</h1>
+        <p>Add List Item: <input type="text" id="addItem"></p>
+        <button class="btn btn-primary" onclick="addListItem()">Add</button>
+        <div>
+            <table class="table table-striped">
+                <% let count=0; %>
+                    <% let length=0; %>
+                        <% let ob=[] %>
+                            <% const keys=Object.keys(listItems) %>
+                                <% keys.forEach((key)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="isChecked" onchange="isChecked( '<%= key %>', '<%= listItems[key].isActive %>')">
+                                            <input type="text" id="active" value="'<%= listItems[key].isActive %>'" disabled>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= listItems[key].listItem %>
+                                                    <% if(listItems[key].isActive=='1') count+=1; %>
+                                                        <% length+=1 %>
+                                                            <% ob.push(key) %>
+                                            </p>
+                                        </td>
+                                        <td>
+
+                                            <button id="edit" class="btn" onclick="editListItem( '<%= key %>', '<%= listItems[key].listItem %>')">Edit</button>
+                                            <button id="delete" class="btn btn-danger" onclick="deleteListItem( '<%= key %>')">Delete</button>
+
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                        <% %>
+            </table>
+        </div>
+        <div>
+            <input type="text" id="active" value="<%= count %> of <%= length %> job done" disabled>
+            <button id="unCheckAll" class="btn btn-danger" onclick="uncheckAll('<%= ob %>')">Uncheck All</button>
+        </div>
+        <h3 id="google-displayName"></h3>
+        <img id="google-pic" src="" alt="">
+        <p id="google-email"></p>
+        <button id="google-signin" class="btn btn-primary" onclick={signInWithGoogle()}>Sign In With Google</button>
+        <button id="google-signout" class="btn btn-" onclick={signOut()} style="display:none;visibility:hidden;">Sign Out</button>
+    </div>
+    <script src="js/firebaseAuth.js"></script>
+    <script src="js/firebaseToDo.js"></script>
+</body>
+
+</html>
