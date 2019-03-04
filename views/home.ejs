@@ -30,40 +30,41 @@
         <div id="list" style="display:none;">
             <p>Add List Item: <input type="text" id="addItem"></p>
             <button class="btn btn-primary" onclick="addListItem()">Add</button>
+            <div>
+                <table class="table table-striped">
+                    <% let count=0; %>
+                        <% let length=0; %>
+                            <% let ob=[] %>
+                                <% const keys=Object.keys(listItems) %>
+                                    <% keys.forEach((key)=>{ %>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" id="isChecked" onchange="isChecked( '<%= key %>', '<%= listItems[key].isActive %>')">
+                                                <input type="text" id="active" value="'<%= listItems[key].isActive %>'" disabled>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    <%= listItems[key].listItem %>
+                                                        <% if(listItems[key].isActive=='1') count+=1; %>
+                                                            <% length+=1 %>
+                                                                <% ob.push(key) %>
+                                                </p>
+                                            </td>
+                                            <td>
 
-            <table class="table table-striped">
-                <% let count=0; %>
-                    <% let length=0; %>
-                        <% let ob=[] %>
-                            <% const keys=Object.keys(listItems) %>
-                                <% keys.forEach((key)=>{ %>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" id="isChecked" onchange="isChecked( '<%= key %>', '<%= listItems[key].isActive %>')">
-                                            <input type="text" id="active" value="'<%= listItems[key].isActive %>'" disabled>
-                                        </td>
-                                        <td>
-                                            <p>
-                                                <%= listItems[key].listItem %>
-                                                    <% if(listItems[key].isActive=='1') count+=1; %>
-                                                        <% length+=1 %>
-                                                            <% ob.push(key) %>
-                                            </p>
-                                        </td>
-                                        <td>
+                                                <button id="edit" class="btn" onclick="editListItem( '<%= key %>', '<%= listItems[key].listItem %>')">Edit</button>
+                                                <button id="delete" class="btn btn-danger" onclick="deleteListItem( '<%= key %>')">Delete</button>
 
-                                            <button id="edit" class="btn" onclick="editListItem( '<%= key %>', '<%= listItems[key].listItem %>')">Edit</button>
-                                            <button id="delete" class="btn btn-danger" onclick="deleteListItem( '<%= key %>')">Delete</button>
-
-                                        </td>
-                                    </tr>
-                                    <% }) %>
-                                        <% %>
-            </table>
-        </div>
-        <div id="list" style="display:none;">
-            <input type="text" id="active" value="<%= count %> of <%= length %> job done" disabled>
-            <button id="unCheckAll" class="btn btn-danger" onclick="uncheckAll('<%= ob %>')">Uncheck All</button>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% %>
+                </table>
+            </div>
+            <div id="btnList">
+                <input type="text" id="active" value="<%= count %> of <%= length %> job done" disabled>
+                <button id="unCheckAll" class="btn btn-danger" onclick="uncheckAll('<%= ob %>')">Uncheck All</button>
+            </div>
         </div>
         <h3 id="google-displayName"></h3>
         <img id="google-pic" src="" alt="">
