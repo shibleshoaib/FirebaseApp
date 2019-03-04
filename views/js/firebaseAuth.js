@@ -7,6 +7,8 @@ function checkIfLoggedIn() {
                 .setAttribute('style', 'display:none;visibility:hidden');
             document.getElementById('google-signout')
                 .setAttribute('style', 'display:inline-block;visibility:visible');
+            document.getElementById('list')
+                .setAttribute('style', 'display:inline-block;visibility:visible');
             document.getElementById('google-pic')
                 .setAttribute('src', user.photoURL);
         } else {
@@ -50,6 +52,8 @@ function signOut() {
         .setAttribute('src', '');
     document.getElementById('google-displayName')
         .innerHTML = '';
+    document.getElementById('list')
+        .setAttribute('style', 'display:none');
     checkIfLoggedIn();
 }
 

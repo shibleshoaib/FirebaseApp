@@ -27,9 +27,10 @@
 <body>
     <div class="container">
         <h1>ToDo List App</h1>
-        <p>Add List Item: <input type="text" id="addItem"></p>
-        <button class="btn btn-primary" onclick="addListItem()">Add</button>
-        <div>
+        <div id="list" style="display:none;">
+            <p>Add List Item: <input type="text" id="addItem"></p>
+            <button class="btn btn-primary" onclick="addListItem()">Add</button>
+
             <table class="table table-striped">
                 <% let count=0; %>
                     <% let length=0; %>
@@ -60,7 +61,7 @@
                                         <% %>
             </table>
         </div>
-        <div>
+        <div id="list" style="display:none;">
             <input type="text" id="active" value="<%= count %> of <%= length %> job done" disabled>
             <button id="unCheckAll" class="btn btn-danger" onclick="uncheckAll('<%= ob %>')">Uncheck All</button>
         </div>
